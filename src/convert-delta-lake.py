@@ -3,7 +3,6 @@ author@Kyle E.
 This code takes a path from your Data Lake and converts it to 'delta' format which is a pre-requisite for this.
 Feel free to edit the file formats. For this demo, we will use a standard csv file
 """
-
 from delta import *
 from pyspark.sql.session import SparkSession
 
