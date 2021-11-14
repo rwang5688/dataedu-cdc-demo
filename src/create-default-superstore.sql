@@ -19,8 +19,12 @@ CREATE EXTERNAL TABLE IF NOT EXISTS default.superstore (
     sales STRING,
     quantity STRING,
     discount STRING,
-    profit STRING
-) ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
+    profit STRING    
+)
+PARTITIONED BY (date_part STRING) 
+ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
 STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.SymlinkTextInputFormat'
 OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' 
-LOCATION 's3://glue-delta-lake-demo-us-west-2-3f8a6345c81e4d5b8e88f3d8f318a3c4/delta/current/_symlink_format_manifest/'
+LOCATION 's3://glue-delta-lake-demo-us-west-2-3f8a6345c81e4d5b8e88f3d8f318a3c4/delta/current/_symlink_format_manifest/';
+
+MSCK REPAIR TABLE default.superstore;
