@@ -21,8 +21,8 @@ spark = SparkSession \
 
 updateDF = spark.sql("""
 
-MERGE INTO delta.`s3a://delta-lake-aws-glue-demo/current/` as superstore
-USING delta.`s3a://delta-lake-aws-glue-demo/updates_delta/` as updates
+MERGE INTO delta.`s3a://glue-delta-lake-demo-us-west-2-3f8a6345c81e4d5b8e88f3d8f318a3c4/delta/current/` as superstore
+USING delta.`s3a://glue-delta-lake-demo-us-west-2-3f8a6345c81e4d5b8e88f3d8f318a3c4/delta/updates_delta/` as updates
 ON superstore.row_id = updates.row_id
 WHEN MATCHED THEN
   UPDATE SET *
@@ -32,7 +32,7 @@ WHEN NOT MATCHED
 """)
 
 # Generate MANIFEST file for Athena/Catalog
-deltaTable = DeltaTable.forPath(spark, "s3a://delta-lake-aws-glue-demo/current/")
+deltaTable = DeltaTable.forPath(spark, "s3a://glue-delta-lake-demo-us-west-2-3f8a6345c81e4d5b8e88f3d8f318a3c4/delta/current/")
 deltaTable.generate("symlink_format_manifest")
 
 ### OPTIONAL
@@ -41,6 +41,6 @@ deltaTable.generate("symlink_format_manifest")
 spark.sql("""
 
 GENERATE symlink_format_manifest 
-FOR TABLE delta.`s3a://delta-lake-aws-glue-demo/current/`
+FOR TABLE delta.`s3a://glue-delta-lake-demo-us-west-2-3f8a6345c81e4d5b8e88f3d8f318a3c4/delta/current/`
 
 """)
