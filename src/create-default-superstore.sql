@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE IF NOT EXISTS superstore ( 
+CREATE EXTERNAL TABLE IF NOT EXISTS default.superstore ( 
     row_id STRING,
     order_id STRING,
     order_date STRING,
@@ -20,8 +20,7 @@ CREATE EXTERNAL TABLE IF NOT EXISTS superstore (
     quantity STRING,
     discount STRING,
     profit STRING
-)
-ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
+) ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
 STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.SymlinkTextInputFormat'
-OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat' 
 LOCATION 's3://glue-delta-lake-demo-us-west-2-3f8a6345c81e4d5b8e88f3d8f318a3c4/delta/current/_symlink_format_manifest/'
