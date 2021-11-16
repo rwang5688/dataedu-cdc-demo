@@ -1,2 +1,2 @@
-# dataedu-demo
-DataEDU Demo
+# dataedu-cdc-demo
+DataEDU Continuous Data Change (CDC) Demo
